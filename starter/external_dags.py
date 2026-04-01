@@ -16,6 +16,13 @@ def logistics_dag():
     def _():
         pass
 
+@dag
+def anomaly_detection():
+
+    @task
+    def _():
+        pass
+
 finance_dag()
 logistics_dag()
-
+anomaly_detection()

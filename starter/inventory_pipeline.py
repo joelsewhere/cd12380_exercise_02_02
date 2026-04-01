@@ -30,16 +30,13 @@
 
 # Replace `### YOUR CODE HERE` with your code!
 
-from __future__ import annotations
-
-from datetime import datetime
 
 from airflow.sdk import DAG, Asset, task
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
 
 # ---------------------------------------------------------------------------
-# EXERCISE B — Asset definitions
+# ADDITION B — Asset definitions
 #
 # Define two Asset objects that downstream DAGs will use as their schedule:
 #
@@ -108,7 +105,7 @@ with DAG(
     # -----------------------------------------------------------------------
     # Task 2 — validate stock levels (do not modify the function body)
     #
-    # EXERCISE B (part 1) — add `outlets=[validation_asset]` to the
+    # ADDITION B (part 1) — add `outlets=[validation_asset]` to the
     # @task decorator so the logistics team's DAG is triggered on completion.
     # -----------------------------------------------------------------------
     @task
@@ -118,7 +115,7 @@ with DAG(
         return validated
 
     # -----------------------------------------------------------------------
-    # EXERCISE A — insert enrich_shipments between validate and write
+    # ADDITION A — insert enrich_shipments between validate and write
     #
     # Create a @task called `enrich_shipments` that:
     #   - Receives the validated shipment list from validate_shipments
@@ -136,7 +133,7 @@ with DAG(
     # -----------------------------------------------------------------------
     # Task 3 — write stock summary (do not modify the function body)
     #
-    # EXERCISE B (part 2) — add `outlets=[stock_summary_asset]` to the
+    # ADDITION B (part 2) — add `outlets=[stock_summary_asset]` to the
     # @task decorator so the finance team's DAG is triggered on completion.
     # -----------------------------------------------------------------------
     @task
@@ -144,7 +141,7 @@ with DAG(
         _write_summary(enriched, context["ds"])
 
     # -----------------------------------------------------------------------
-    # EXERCISE C — add a TriggerDagRunOperator
+    # ADDITION C — add a TriggerDagRunOperator
     #
     # After write_stock_summary completes, trigger the anomaly detection DAG.
     #
@@ -160,15 +157,15 @@ with DAG(
     ### YOUR CODE HERE
 
     # -----------------------------------------------------------------------
-    # Wiring — update this section to complete Exercises A and C.
+    # Wiring — update this section to complete Additions A and C.
     #
     # Current chain:
     #   fetch_shipments >> validate_shipments >> write_stock_summary
     #
-    # After Exercise A, enrich_shipments must sit between validate and write:
+    # After Addition A, enrich_shipments must sit between validate and write:
     #   fetch_shipments >> validate_shipments >> enrich_shipments >> write_stock_summary
     #
-    # After Exercise C, trigger_anomaly_detection follows write_stock_summary.
+    # After Addition C, trigger_anomaly_detection follows write_stock_summary.
     # -----------------------------------------------------------------------
     shipments = fetch_shipments()
     validated = validate_shipments(shipments)

@@ -1,5 +1,5 @@
 # from airflow.sdk import dag, task
-# from cd12380_exercise_02_02.solution.solution import stock_summary_asset, validation_asset
+# from solution import stock_summary_asset, validation_asset
 
 
 # @dag(schedule=stock_summary_asset)
